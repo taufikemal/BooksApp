@@ -1,6 +1,7 @@
 package com.example.booksapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +32,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ItemData data = values.get(position);
+        final ItemData data = values.get(position);
         holder.titleText.setText(data.itemTitle);
         holder.authorText.setText(data.itemAuthor);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("DATA", data);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
